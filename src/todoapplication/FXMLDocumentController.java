@@ -35,19 +35,17 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        db.todoItems();
+        this.toDoList.setItems(this.db.todoItems());
     }    
 
     @FXML
     private void insert(ActionEvent event) {
         String todoItem = this.inputField.getText();
         if (todoItem.length()>0) {
-            toDoList.getItems().add(todoItem);
-            this.advarsel.setText("");
+            this.db.writeString(todoItem);
         } else {
             this.advarsel.setText("Venligst skriv noget");
         }
-        
     }
 
     @FXML

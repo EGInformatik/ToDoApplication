@@ -9,6 +9,7 @@ package todoapplication;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,14 +45,22 @@ public class DatabaseLayer {
                     .createStatement()
                     .executeQuery(query);
             while(result.next()) {
-                System.out.println(result.getString("TodoString"));
                 todoItems.add(result.getString("TodoString"));
             }
         } catch(SQLException ex) {
            
         }
-        System.out.println(todoItems);
         return todoItems;
+    }
+
+    void writeString(String todoItem) {
+        String query = "INSERT INTO TodoItem (TodoString) VALUES ('"+todoItem+"')";
+        try {
+           PreparedStatement ps = connection.prepareStatement(query);
+           ps.executeUpdate();
+        } catch (SQLException ex) {
+            
+        }
     }
     
 }
