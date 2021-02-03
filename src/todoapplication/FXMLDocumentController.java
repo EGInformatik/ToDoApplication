@@ -31,10 +31,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button doneJohnButton;
 
+    DatabaseLayer db = new DatabaseLayer();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        db.todoItems();
     }    
 
     @FXML
